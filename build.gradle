@@ -1,19 +1,89 @@
-plugins {
-    id 'java'
-}
+defaultTasks 'clean', 'test', 'aggregate'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
 
 group 'org.api.testing.demo'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:3.2.5")
+        classpath("net.serenity-bdd:serenity-single-page-report:3.5.1")
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+serenity {
+    reports = ["single-page-html"]
+    testRoot="src/test/java/org/api/testing/demo"
+}
+
+ext {
+    serenityVersion = '3.5.1'
+    junitVersion = '5.9.1'
+    schema = '5.3.0'
+    gsonVersion = '2.9.0'
+    jsonpath = '2.7.0'
+    jsonSimpleVersion = '1.1.1'
+    assertJVersion = '3.22.0'
+    hamcrestVersion = '2.2'
+    logbackVersion = '1.2.11'
+    slf4j = '2.0.4'
+    lombokVersion = '1.18.24'
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityVersion}",
+            "net.serenity-bdd:serenity-screenplay-rest:${serenityVersion}",
+            "net.serenity-bdd:serenity-rest-assured:${serenityVersion}",
+            "net.serenity-bdd:serenity-cucumber:${serenityVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityVersion}",
+            "net.serenity-bdd:serenity-junit:${serenityVersion}",
+
+            "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
+            "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
+
+            "io.rest-assured:json-schema-validator:${schema}",
+            "com.google.code.gson:gson:${gsonVersion}",
+            "com.jayway.jsonpath:json-path:${jsonpath}",
+            "com.googlecode.json-simple:json-simple:${jsonSimpleVersion}",
+
+            "org.assertj:assertj-core:${assertJVersion}",
+            "org.hamcrest:hamcrest:${hamcrestVersion}",
+
+            "ch.qos.logback:logback-classic:${logbackVersion}",
+            "org.slf4j:slf4j-simple:${slf4j}",
+
+            "org.projectlombok:lombok:${lombokVersion}"
 }
 
 test {
     useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
 }
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
