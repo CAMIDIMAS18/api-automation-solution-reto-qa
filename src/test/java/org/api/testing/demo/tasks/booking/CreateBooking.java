@@ -11,20 +11,20 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static org.api.testing.demo.environments.Endpoints.CREATE_BOOKING;
 import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.postApi;
 
-public class CreateBookingTask implements Task {
+public class CreateBooking implements Task {
 
     private final Map<String, String> bookingInformation;
 
-    public CreateBookingTask(Map<String, String> bookingInformation) {
+    public CreateBooking(Map<String, String> bookingInformation) {
         this.bookingInformation = bookingInformation;
     }
 
-    public static CreateBookingTask withBookingInformation(Map<String, String> bookingInformation) {
-        return instrumented(CreateBookingTask.class, bookingInformation);
+    public static CreateBooking withInformationRequested(Map<String, String> bookingInformation) {
+        return instrumented(CreateBooking.class, bookingInformation);
     }
 
     @Override
-    @Step("{0} realiza la creación de su reserva")
+    @Step("se realiza la tarea de creación de la reserva para {0}")
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(RequestPostHttpMethod.withData(
                 CREATE_BOOKING,
