@@ -15,14 +15,5 @@ public class CommonHooks {
     @Before
     public void setTheStage() {
         OnStage.setTheStage(new OnlineCast());
-        theActorCalled("Juan");
-        String theRestApiBaseUrl = environmentVariables.optionalProperty("environments.dev.baseurl")
-                .orElse("environments.stg.baseurl");
-        theActorInTheSpotlight().whoCan(CallAnApi.at(theRestApiBaseUrl));
- /*       String theRestApiBaseUrl = environmentVariables.optionalProperty("environments.dev.baseurl")
-                .orElse("environments.stg.baseurl");
-        theActorInTheSpotlight().whoCan(CallAnApi.at(theRestApiBaseUrl));
-        theActorInTheSpotlight().describedAs("un huésped que puede crear, consultar, actualizar y eliminar reservas");
-    */
     }
 }

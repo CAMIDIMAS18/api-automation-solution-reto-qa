@@ -3,6 +3,7 @@ package org.api.testing.demo.steps;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
+import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import org.api.testing.demo.environments.Endpoints;
 
@@ -11,13 +12,20 @@ import java.util.Map;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActor;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.api.testing.demo.environments.Endpoints.BASE_URL;
 
 public class StepsDefinitions {
-    @Dado("que Camila desea {string} una reserva")
-    public void preparingAPI(String requestOption) {
-        if (requestOption.contains("crear")) {
-            theActorInTheSpotlight().describedAs("un huésped que puede crear, consultar, actualizar y eliminar reservas");
-            theActor("Camila").can(CallAnApi.at(Endpoints.BASE_URL));
+    @Dado("que {} desea crear/consultar/actualizar/eliminar una reserva")
+    public void preparingAPI(String actorName) {
+        OnStage.theActorCalled(actorName).describedAs("es un huésped que puede crear, consultar, actualizar y eliminar reservas");
+        theActorInTheSpotlight().whoCan(CallAnApi.at(BASE_URL));
+    }
+
+    @Cuando("el/ella ingrese la siguiente información en los campos correspondientes a la {string}")
+    public void sendRequestToApi(String requestOption, List<Map<String, String>> dataMapList) {
+
+        if (requestOption.contains("creación")) {
+            System.out.println("Opción:" + requestOption);
 
         } else if (requestOption.contains("consultar")) {
             System.out.println("Opción:" + requestOption);
@@ -33,13 +41,7 @@ public class StepsDefinitions {
         }
     }
 
-
-    @Cuando("el diligencie la siguiente información en los campos correspondientes")
-    public void sendRequestToApi(List<Map<String, String>> dataMapList) {
-
-    }
-
-    @Entonces("debera validar que la reservación fue creada con éxito")
+    @Entonces("deberá validar que la reservación fue creada con éxito")
     public void validateServiceResponse() {
 
     }
