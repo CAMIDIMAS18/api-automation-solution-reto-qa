@@ -34,7 +34,8 @@ compileTestJava.options.encoding = "UTF-8"
 
 serenity {
     reports = ["single-page-html"]
-    testRoot="src/test/java/org/api/testing/demo"
+    testRoot = "starter"
+    requirementsDir = "src/test/resources/features"
 }
 
 ext {
@@ -79,15 +80,13 @@ dependencies {
 }
 
 test {
-    filter {
-        include 'org/api/testing/demo/runners/TestRunner.class'
-    }
+
+    testLogging.showStandardStreams = true
 
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 
-    testLogging.showStandardStreams = true
     systemProperties System.getProperties()
     systemProperty "cucumber.options", System.getProperty("cucumber.options")
     systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
