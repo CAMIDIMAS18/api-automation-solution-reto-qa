@@ -15,7 +15,7 @@ public class Endpoints {
     public static final String DELETE_BOOKING = setEndpoint("deleteBooking");
     public static final String HEALTH_CHECK = setEndpoint("healthCheckApi");
 
-    public Endpoints() {
+    private Endpoints() {
         //Nothing
     }
 

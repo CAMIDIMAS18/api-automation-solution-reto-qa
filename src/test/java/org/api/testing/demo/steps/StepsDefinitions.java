@@ -5,7 +5,8 @@ import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
-import org.api.testing.demo.tasks.booking.CreateBookingTask;
+import org.api.testing.demo.abilities.Authenticate;
+import org.api.testing.demo.tasks.booking.CreateBooking;
 
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,12 @@ public class StepsDefinitions {
     @Dado("que {} desea crear/consultar/actualizar/eliminar una reserva")
     public void preparingAPI(String actorName) {
         OnStage.theActorCalled(actorName).describedAs("es un huésped que puede crear, consultar, actualizar y eliminar reservas");
-        theActorInTheSpotlight().whoCan(CallAnApi.at(BASE_URL));
+        theActorInTheSpotlight()
+                .whoCan(CallAnApi.at(BASE_URL))
+                .whoCan(Authenticate.with("admin", "password123"));
     }
 
-    @Cuando("el/ella ingrese la siguiente información en los campos correspondientes a la {string}")
+    @Cuando("el/ella ingrese/ingresa la siguiente información en los campos correspondientes a la {string}")
     public void sendRequestToApi(String requestOption, List<Map<String, String>> dataMapList) {
 
         if (requestOption.contains("creación")) {
@@ -29,7 +32,7 @@ public class StepsDefinitions {
 
             for (Map<String, String> data : dataMapList) {
 
-                theActorInTheSpotlight().attemptsTo(CreateBookingTask.withBookingInformation(data));
+                theActorInTheSpotlight().attemptsTo(CreateBooking.withInformationRequested(data));
 
                 String responseBody = lastResponse().getBody().prettyPrint();
             }

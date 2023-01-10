@@ -26,7 +26,7 @@ public class RequestPostHttpMethod implements Interaction {
     }
 
     @Override
-    @Step("{0} realiza una petición POST del servicio de creación")
+    @Step("realizando la petición al servicio")
     public <T extends Actor> void performAs(T actor) {
 
         SerenityRest.rest();
