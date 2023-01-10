@@ -16,8 +16,8 @@ Necesidad del negocio: Crear una nueva reserva
     @CreateBooking
     Esquema del escenario: YAPE-001 - Crear una nueva reserva
       Cuando ella ingrese la siguiente información en los campos correspondientes a la "creación"
-        | Primer Nombre | Primer Apellido | Precio Reserva | Deposito      | Fecha Registro | Fecha Salida   | Servicios Adicionales |
-        | <firstname>   | <lastname>      | <totalprice>   | <depositpaid> | <checkinDate>  | <checkoutDate> | <additionalneeds>     |
+        | firstname   | lastname   | totalprice   | depositpaid   | checkinDate   | checkoutDate   | additionalneeds   |
+        | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkinDate> | <checkoutDate> | <additionalneeds> |
       Entonces deberá validar que la reservación fue creada con éxito
       Ejemplos:
         | firstname | lastname | totalprice | depositpaid | checkinDate | checkoutDate | additionalneeds   |

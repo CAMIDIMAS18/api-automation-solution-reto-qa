@@ -5,12 +5,12 @@ import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
-import org.api.testing.demo.environments.Endpoints;
+import org.api.testing.demo.tasks.booking.CreateBookingTask;
 
 import java.util.List;
 import java.util.Map;
 
-import static net.serenitybdd.screenplay.actors.OnStage.theActor;
+import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.api.testing.demo.environments.Endpoints.BASE_URL;
 
@@ -26,6 +26,13 @@ public class StepsDefinitions {
 
         if (requestOption.contains("creación")) {
             System.out.println("Opción:" + requestOption);
+
+            for (Map<String, String> data : dataMapList) {
+
+                theActorInTheSpotlight().attemptsTo(CreateBookingTask.withBookingInformation(data));
+
+                String responseBody = lastResponse().getBody().prettyPrint();
+            }
 
         } else if (requestOption.contains("consultar")) {
             System.out.println("Opción:" + requestOption);
