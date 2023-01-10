@@ -22,6 +22,4 @@ public class Endpoints {
     public static String setEndpoint(String path) {
         return EnvironmentSpecificConfiguration.from(CommonHooks.environmentVariables).getProperty(path);
     }
-
-
 }
