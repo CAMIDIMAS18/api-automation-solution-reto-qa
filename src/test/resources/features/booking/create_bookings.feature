@@ -16,7 +16,7 @@ Necesidad del negocio: Realizar la creación de una nueva reserva
     @CreateBooking
       #CB - Create Booking
     Esquema del escenario: [YAPE-CB-001] Crear una nueva reserva
-      Cuando ella ingresa la siguiente información solicitada para la "creación" de la reserva
+      Cuando ella ingresa la siguiente información solicitada para la creación de la reserva
         | firstname   | lastname   | totalprice   | depositpaid   | checkinDate   | checkoutDate   | additionalneeds   |
         | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkinDate> | <checkoutDate> | <additionalneeds> |
       Entonces su solicitud se creará en el sistema con un número de registro único

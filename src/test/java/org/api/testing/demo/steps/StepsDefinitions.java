@@ -27,7 +27,7 @@ public class StepsDefinitions {
                 .whoCan(CallAnApi.at(CAMILA.recall(URI)));
     }
 
-    @Cuando("el/ella ingresa la siguiente información solicitada para la {string} de la reserva")
+    @Cuando("el/ella ingresa la siguiente información solicitada para la {} de la reserva")
     public void sendRequestToApi(String requestOption, List<Map<String, String>> dataMapList) {
 
         if (requestOption.contains("creación")) {
