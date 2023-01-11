@@ -37,17 +37,17 @@ public class JsonUtils {
         return documentContext;
     }
 
-    public static JsonObject parseJsonObjectOfGson(String jsonObjectString) {
+    public static JsonObject parseJsonObject(String jsonObjectString) {
         JsonElement jsonElement = JsonParser.parseString(jsonObjectString);
         return jsonElement.getAsJsonObject();
     }
 
-    public static JsonArray parseJsonArrayOfGson(String jsonArrayString) {
+    public static JsonArray parseJsonArray(String jsonArrayString) {
         JsonElement jsonElement = JsonParser.parseString(jsonArrayString);
         return jsonElement.getAsJsonArray();
     }
 
-    public static JSONObject parseJsonObjectOfJson(String jsonObjectString) {
+    public static JSONObject parseJSONObject(String jsonObjectString) {
         try {
             return (JSONObject) new JSONParser().parse(jsonObjectString);
         } catch (ParseException e) {
@@ -55,7 +55,7 @@ public class JsonUtils {
         }
     }
 
-    public static JSONArray parseJsonArrayOfJson(String jsonArrayString) {
+    public static JSONArray parseJSONArray(String jsonArrayString) {
         try {
             return (JSONArray) new JSONParser().parse(jsonArrayString);
         } catch (ParseException e) {
