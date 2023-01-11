@@ -5,7 +5,6 @@ import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
-import org.api.testing.demo.abilities.Authenticate;
 import org.api.testing.demo.tasks.booking.CreateBooking;
 
 import java.util.List;
@@ -13,18 +12,22 @@ import java.util.Map;
 
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.api.testing.demo.environments.Endpoints.BASE_URL;
+import static org.api.testing.demo.steps.conf.Actors.CAMILA;
+import static org.api.testing.demo.utils.common.JsonUtils.parseJsonObject;
+import static org.api.testing.demo.utils.constants.Constants.URI;
 
 public class StepsDefinitions {
-    @Dado("que {} desea crear/consultar/actualizar/eliminar una reserva")
-    public void preparingAPI(String actorName) {
-        OnStage.theActorCalled(actorName).describedAs("es un huésped que puede crear, consultar, actualizar y eliminar reservas");
+
+    public static final String BODY = "body";
+
+    @Dado("que la/el cliente desea crear/consultar/actualizar/eliminar una/la reservación de/para su próximo viaje")
+    public void preparingAPI() {
+        OnStage.theActorCalled(CAMILA.toString());
         theActorInTheSpotlight()
-                .whoCan(CallAnApi.at(BASE_URL))
-                .whoCan(Authenticate.with("admin", "password123"));
+                .whoCan(CallAnApi.at(CAMILA.recall(URI)));
     }
 
-    @Cuando("el/ella ingrese/ingresa la siguiente información en los campos correspondientes a la {string}")
+    @Cuando("el/ella ingresa la siguiente información solicitada para la {string} de la reserva")
     public void sendRequestToApi(String requestOption, List<Map<String, String>> dataMapList) {
 
         if (requestOption.contains("creación")) {
@@ -34,7 +37,14 @@ public class StepsDefinitions {
 
                 theActorInTheSpotlight().attemptsTo(CreateBooking.withInformationRequested(data));
 
+                //Muestra la respuesta del servicio
+                System.out.println("****Response");
                 String responseBody = lastResponse().getBody().prettyPrint();
+
+                //Trae el parametro bookingid
+                Integer bookingId = parseJsonObject(lastResponse().getBody().asString()).get("bookingid").getAsInt();
+                System.out.println("*** bookingid: " + bookingId);
+                CAMILA.remember(BODY, responseBody);
             }
 
         } else if (requestOption.contains("consultar")) {
@@ -51,10 +61,8 @@ public class StepsDefinitions {
         }
     }
 
-    @Entonces("deberá validar que la reservación fue creada con éxito")
+    @Entonces("su solicitud se creará en el sistema con un número de registro único")
     public void validateServiceResponse() {
-
+        CAMILA.recall(BODY);
     }
-
-
 }
