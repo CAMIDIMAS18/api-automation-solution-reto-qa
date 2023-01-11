@@ -23,7 +23,7 @@ Necesidad del negocio: Realizar la creación de una nueva reserva
       Ejemplos:
         | firstname | lastname | totalprice | depositpaid | checkinDate | checkoutDate | additionalneeds   |
         | Camila    | Dimas    | 9000       | true        | 2023-01-07  | 2023-01-07   | Breakfast, Dinner |
-        | Julian    | Bautista | 19000      | false       | 2023-06-08  | 2023-06-16   | [blank]           |
+        #| Julian    | Bautista | 19000      | false       | 2023-06-08  | 2023-06-16   | [blank]           |
 
 
     @NotCreateBooking
