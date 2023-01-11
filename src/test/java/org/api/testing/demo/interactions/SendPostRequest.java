@@ -1,6 +1,5 @@
 package org.api.testing.demo.interactions;
 
-import io.restassured.http.ContentType;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
@@ -8,33 +7,35 @@ import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.thucydides.core.annotations.Step;
 import org.api.testing.demo.models.request.CreateBookingRequestBuilder;
 
+import java.util.Map;
+
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-public class RequestPostHttpMethod implements Interaction {
+public class SendPostRequest implements Interaction {
 
     private final String endPoint;
+    private final CreateBookingRequestBuilder requestModelBuilder;
+    private Map<String, String> headers;
 
-    private final CreateBookingRequestBuilder requestModelBuilder; //como hago generico esto?, desacoplar el builder, que reciba cualquiera
-
-    public RequestPostHttpMethod(String endPoint, CreateBookingRequestBuilder requestModelBuilder) {
+    public SendPostRequest(String endPoint, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
         this.endPoint = endPoint;
+        this.headers = headers;
         this.requestModelBuilder = requestModelBuilder;
     }
 
-    public static RequestPostHttpMethod withData(String endPoint, CreateBookingRequestBuilder requestModelBuilder) {
-        return instrumented(RequestPostHttpMethod.class, endPoint, requestModelBuilder);
+    public static SendPostRequest with(String endPoint, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
+        return instrumented(SendPostRequest.class, endPoint, headers, requestModelBuilder);
     }
 
     @Override
-    @Step("realizando la petición al servicio")
+    @Step("se realiza la petición al servicio")
     public <T extends Actor> void performAs(T actor) {
 
         SerenityRest.rest();
         actor.attemptsTo(
                 Post.to(endPoint)
                         .with(requestSpecification -> requestSpecification
-                                .header("Accept", "application/json") //desacoplar los headers (builder -> probar)
-                                .contentType(ContentType.JSON)
+                                .headers(headers)
                                 .body(requestModelBuilder.getRequestBody())
                                 .relaxedHTTPSValidation()
                                 .log().all())

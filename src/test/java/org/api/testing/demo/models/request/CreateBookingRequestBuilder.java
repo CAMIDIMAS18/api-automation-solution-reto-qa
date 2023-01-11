@@ -22,7 +22,7 @@ public class CreateBookingRequestBuilder {
             // initialize without attributes
         }
 
-        public static Builder postApi() { //inicia la construccion del modelo
+        public static Builder andRequestBody() { //start building the model
             return new Builder();
         }
 
@@ -59,7 +59,7 @@ public class CreateBookingRequestBuilder {
             return this;
         }
 
-        public CreateBookingRequestBuilder build() { // Entrega una instancia del modelo
+        public CreateBookingRequestBuilder build() { // Returns an instance of the model
             return createBookingRequestBuilder;
         }
     }

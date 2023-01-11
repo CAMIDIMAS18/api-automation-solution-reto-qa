@@ -3,13 +3,14 @@ package org.api.testing.demo.tasks.booking;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.thucydides.core.annotations.Step;
-import org.api.testing.demo.interactions.RequestPostHttpMethod;
+import org.api.testing.demo.interactions.SendPostRequest;
 
 import java.util.Map;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static org.api.testing.demo.environments.Endpoints.CREATE_BOOKING;
-import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.postApi;
+import static org.api.testing.demo.models.headers.GetHeaderModel.headersDefault;
+import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.andRequestBody;
 
 public class CreateBooking implements Task {
 
@@ -26,9 +27,10 @@ public class CreateBooking implements Task {
     @Override
     @Step("se realiza el proceso de creación de la reserva para {0} con la información ingresada")
     public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(RequestPostHttpMethod.withData(
+        actor.attemptsTo(SendPostRequest.with(
                 CREATE_BOOKING,
-                postApi()
+                headersDefault(),
+                andRequestBody()
                         .withFirstName(bookingInformation.get("firstname"))
                         .andLastName(bookingInformation.get("lastname"))
                         .andTotalPrice(Integer.valueOf(bookingInformation.get("totalprice")))
