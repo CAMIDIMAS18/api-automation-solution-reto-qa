@@ -1,10 +1,13 @@
 package org.api.testing.demo.tasks.booking;
 
+import io.cucumber.java.ParameterType;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.thucydides.core.annotations.Step;
 import org.api.testing.demo.interactions.RequestPostHttpMethod;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
@@ -24,7 +27,7 @@ public class CreateBooking implements Task {
     }
 
     @Override
-    @Step("se realiza la tarea de creación de la reserva para {0}")
+    @Step("se realiza la tarea de creación de la reserva para {0} con la información ingresada")
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(RequestPostHttpMethod.withData(
                 CREATE_BOOKING,
@@ -33,8 +36,7 @@ public class CreateBooking implements Task {
                         .andLastName(bookingInformation.get("lastname"))
                         .andTotalPrice(Integer.valueOf(bookingInformation.get("totalprice")))
                         .andDepositPaid(Boolean.valueOf(bookingInformation.get("depositpaid")))
-                        .andCheckInBookingDate(bookingInformation.get("checkinDate"))
-                        .andCheckOutBookingDate(bookingInformation.get("checkoutDate"))
+                        .andBookingDates(bookingInformation.get("checkinDate"), bookingInformation.get("checkoutDate"))
                         .andAdditionalNeeds(bookingInformation.get("additionalneeds"))
                         .build()
         ));

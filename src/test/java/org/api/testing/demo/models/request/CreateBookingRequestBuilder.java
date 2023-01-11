@@ -13,6 +13,9 @@ public class CreateBookingRequestBuilder {
     }
 
     public static class Builder {
+
+        private JSONObject jsonObject;
+
         private CreateBookingRequestBuilder createBookingRequestBuilder = new CreateBookingRequestBuilder();
 
         private Builder() {
@@ -23,7 +26,7 @@ public class CreateBookingRequestBuilder {
             return new Builder();
         }
 
-        public Builder withFirstName(String firstName) { //arma json
+        public Builder withFirstName(String firstName) {
             createBookingRequestBuilder.requestBody.put("$", "firstname", firstName);
             return this;
         }
@@ -43,14 +46,11 @@ public class CreateBookingRequestBuilder {
             return this;
         }
 
-        public Builder andCheckInBookingDate(String checkIn) {
-
-            createBookingRequestBuilder.requestBody.put("$", "bookingdates.checkin", checkIn);
-            return this;
-        }
-
-        public Builder andCheckOutBookingDate(String checkOut) {
-            createBookingRequestBuilder.requestBody.put("$", "bookingdates.checkout", checkOut);
+        public Builder andBookingDates(String checkIn, String checkOut) {
+            jsonObject = new JSONObject();
+            jsonObject.put("checkin", checkIn);
+            jsonObject.put("checkout", checkOut);
+            createBookingRequestBuilder.requestBody.put("$", "bookingdates", jsonObject);
             return this;
         }
 
