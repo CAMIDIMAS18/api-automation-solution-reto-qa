@@ -1,10 +1,10 @@
 package org.api.testing.demo.environments;
 
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import org.api.testing.demo.steps.conf.CommonHooks;
+import org.api.testing.demo.steps.hooks.CommonHooks;
 
 public class Endpoints {
-    public static final String BASE_URL = setEndpoint("baseurl");
+    public static final String BASE_URL = setEndpoint("baseUrl");
     public static final String AUTH = setEndpoint("auth");
     public static final String GET_BOOKING_BY_IDS = setEndpoint("getBookingIds");
     public static final String GET_BOOKING_BY_ID = setEndpoint("getBookingId");

@@ -1,4 +1,4 @@
-package org.api.testing.demo.steps.conf;
+package org.api.testing.demo.steps.hooks;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.DataTableType;
@@ -8,8 +8,8 @@ import net.thucydides.core.util.EnvironmentVariables;
 import org.api.testing.demo.abilities.Authenticate;
 
 import static org.api.testing.demo.environments.Endpoints.BASE_URL;
-import static org.api.testing.demo.steps.conf.Actors.CAMILA;
-import static org.api.testing.demo.utils.constants.Constants.URI;
+import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
+import static org.api.testing.demo.utils.constants.Constants.THE_REST_API_BASE_URL;
 
 public class CommonHooks {
 
@@ -18,7 +18,7 @@ public class CommonHooks {
     @Before
     public void setTheStage() {
         OnStage.setTheStage(new OnlineCast());
-        CAMILA.remember(URI, BASE_URL);
+        CAMILA.remember(THE_REST_API_BASE_URL, BASE_URL);
         CAMILA.describedAs("un huésped que puede crear, consultar, actualizar y eliminar su reserva");
         CAMILA.whoCan(Authenticate.with("admin", "password123"));
     }

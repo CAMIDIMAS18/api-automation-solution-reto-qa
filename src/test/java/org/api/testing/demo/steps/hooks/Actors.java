@@ -1,4 +1,4 @@
-package org.api.testing.demo.steps.conf;
+package org.api.testing.demo.steps.hooks;
 
 import net.serenitybdd.screenplay.Actor;
 

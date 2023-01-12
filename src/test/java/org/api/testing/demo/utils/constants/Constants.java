@@ -5,7 +5,7 @@ public class Constants {
     /**
      * General constants
      */
-    public static final String URI = "La base url del servicio";
+    public static final String THE_REST_API_BASE_URL = "La base url del servicio";
     public static final String VALIDATION_SCHEMA = "Validation schema service response";
 
     /**
