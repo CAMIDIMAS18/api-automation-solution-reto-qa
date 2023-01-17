@@ -17,10 +17,18 @@ import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Bu
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
 import static org.api.testing.demo.utils.common.JsonUtils.parseJsonObject;
 import static org.api.testing.demo.utils.constants.Constants.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CreateBooking implements Task {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateBooking.class.getSimpleName());
+
+
     public static String response;
+
+    public static Integer bookingId;
+
     private final Map<String, String> bookingInformation;
 
 
@@ -51,8 +59,8 @@ public class CreateBooking implements Task {
         DocumentContext documentContext = JsonUtils.parseDocumentContextFromString(response);
         CAMILA.remember(RESPONSE_BODY, response);
 
-        Integer bookingId = parseJsonObject(lastResponse().getBody().asString()).get("bookingid").getAsInt();
+        bookingId = parseJsonObject(lastResponse().getBody().asString()).get("bookingid").getAsInt();
         CAMILA.remember(BOOKING_ID, bookingId);
-        System.out.println("*** bookingid: " + bookingId);
+        LOGGER.info("Booking Id is: {}", bookingId);
     }
 }

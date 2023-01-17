@@ -69,10 +69,5 @@ public class CreatedBookingSteps {
             ValidateInCreatedBookingResponse.thatCheckOutDateIs(userData.get("checkoutDate"));
             ValidateInCreatedBookingResponse.thatAdditionalNeedsIs(userData.get("additionalneeds"));
         }
-
-        //Trae el parametro bookingid
-        Integer bookingId = parseJsonObject(lastResponse().getBody().asString()).get("bookingid").getAsInt();
-        CAMILA.remember(BOOKING_ID, bookingId);
-        System.out.println("*** bookingid: " + bookingId);
     }
 }
