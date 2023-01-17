@@ -9,7 +9,7 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.util.EnvironmentVariables;
 import org.api.testing.demo.abilities.Authenticate;
 
-import static org.api.testing.demo.environments.Endpoints.BASE_URL;
+import static org.api.testing.demo.utils.environments.Endpoints.BASE_URL;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
 import static org.api.testing.demo.utils.constants.Constants.*;
 

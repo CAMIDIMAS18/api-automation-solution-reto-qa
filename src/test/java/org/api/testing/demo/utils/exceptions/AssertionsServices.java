@@ -1,4 +1,4 @@
-package org.api.testing.demo.exceptions;
+package org.api.testing.demo.utils.exceptions;
 
 public class AssertionsServices extends AssertionError {
     public static final String EXCEPTION_ERROR_CONSUMPTION_SERVICE = "An error occurred in the consumption of the service";

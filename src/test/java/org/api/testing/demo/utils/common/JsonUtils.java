@@ -4,7 +4,7 @@ import com.google.gson.*;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
-import org.api.testing.demo.exceptions.GenericRuntimeException;
+import org.api.testing.demo.utils.exceptions.GenericRuntimeException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

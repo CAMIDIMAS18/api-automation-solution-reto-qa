@@ -1,6 +1,6 @@
 package org.api.testing.demo.tasks.booking.created;
 
-import org.api.testing.demo.exceptions.AssertionsServices;
+import org.api.testing.demo.utils.exceptions.AssertionsServices;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;

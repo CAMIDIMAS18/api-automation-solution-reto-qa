@@ -5,13 +5,13 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.thucydides.core.annotations.Step;
-import org.api.testing.demo.exceptions.GenericRuntimeException;
+import org.api.testing.demo.utils.exceptions.GenericRuntimeException;
 import org.api.testing.demo.models.request.CreateBookingRequestBuilder;
 
 import java.util.Map;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static org.api.testing.demo.exceptions.AssertionsServices.EXCEPTION_ERROR_CONSUMPTION_SERVICE;
+import static org.api.testing.demo.utils.exceptions.AssertionsServices.EXCEPTION_ERROR_CONSUMPTION_SERVICE;
 import static org.api.testing.demo.utils.enums.HttpStatusCodes.OK;
 
 public class SendPostRequest implements Interaction {

@@ -1,4 +1,4 @@
-package org.api.testing.demo.environments;
+package org.api.testing.demo.utils.environments;
 
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import org.api.testing.demo.steps.hooks.CommonHooks;

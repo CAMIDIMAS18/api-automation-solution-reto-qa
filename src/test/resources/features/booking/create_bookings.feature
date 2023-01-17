@@ -10,11 +10,9 @@ Necesidad del negocio: Realizar la creación de una nueva reserva
   Regla de negocio: Para la creación exitosa de una reserva se deberán enviar los siguientes campos obligatorios:
   firstName, lastName, totalPrice, depositPaid, checkIn, checkOut, additionalNeeds.
 
-    Antecedentes:
-      Dado que la cliente desea crear la reservación de su próximo viaje
-
     @createBooking
     Esquema del escenario: [YAPE-CB-001] Crear una nueva reserva
+      Dado que la cliente desea crear la reservación de su próximo viaje
       Cuando ella ingresa la siguiente información solicitada para la creación de la reserva
         | firstname   | lastname   | totalprice   | depositpaid   | checkinDate   | checkoutDate   | additionalneeds   |
         | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkinDate> | <checkoutDate> | <additionalneeds> |

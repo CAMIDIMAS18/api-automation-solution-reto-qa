@@ -2,7 +2,7 @@ package org.api.testing.demo.abilities;
 
 import net.serenitybdd.screenplay.Ability;
 import net.serenitybdd.screenplay.Actor;
-import org.api.testing.demo.exceptions.GenericRuntimeException;
+import org.api.testing.demo.utils.exceptions.GenericRuntimeException;
 
 /**
  * A Screenplay ability that allows an actor to perform authenticate with username and password.

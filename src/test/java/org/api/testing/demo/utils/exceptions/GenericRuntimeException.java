@@ -1,4 +1,4 @@
-package org.api.testing.demo.exceptions;
+package org.api.testing.demo.utils.exceptions;
 
 public class GenericRuntimeException extends RuntimeException {
 

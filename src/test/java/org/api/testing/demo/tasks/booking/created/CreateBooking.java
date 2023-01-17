@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static org.api.testing.demo.environments.Endpoints.CREATE_BOOKING;
+import static org.api.testing.demo.utils.environments.Endpoints.CREATE_BOOKING;
 import static org.api.testing.demo.models.headers.GetHeaderModel.headersDefault;
 import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.andRequestBody;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
@@ -55,6 +55,7 @@ public class CreateBooking implements Task {
                         .andAdditionalNeeds(bookingInformation.get("additionalneeds"))
                         .build()
         ));
+        LOGGER.info("Response Body Is: ");
         response = lastResponse().getBody().prettyPrint();
         DocumentContext documentContext = JsonUtils.parseDocumentContextFromString(response);
         CAMILA.remember(RESPONSE_BODY, response);

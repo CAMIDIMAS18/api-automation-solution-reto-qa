@@ -11,15 +11,13 @@ import org.api.testing.demo.tasks.booking.created.ValidateInCreatedBookingRespon
 import java.util.List;
 import java.util.Map;
 
-import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.api.testing.demo.exceptions.AssertionsServices.*;
+import static org.api.testing.demo.utils.exceptions.AssertionsServices.*;
 import static org.api.testing.demo.questions.common.GetExpectedJsonSchema.theJsonSchemaExpectIs;
 import static org.api.testing.demo.questions.common.GetResponseTime.responseTimeIs;
 import static org.api.testing.demo.questions.common.GetStatusCode.httpResponseStatusCodeIs;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
-import static org.api.testing.demo.utils.common.JsonUtils.parseJsonObject;
 import static org.api.testing.demo.utils.constants.Constants.*;
 import static org.api.testing.demo.utils.enums.HttpStatusCodes.OK;
 import static org.hamcrest.Matchers.equalTo;

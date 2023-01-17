@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(publish = true,
-        plugin = {"pretty"},
         features = "src/test/resources/features/booking",
         glue = "org.api.testing.demo.steps",
         tags = "@createBooking",

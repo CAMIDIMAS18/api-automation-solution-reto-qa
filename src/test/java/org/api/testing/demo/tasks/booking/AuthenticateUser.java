@@ -7,7 +7,7 @@ import org.api.testing.demo.abilities.Authenticate;
 import org.api.testing.demo.interactions.SendPostRequest;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static org.api.testing.demo.environments.Endpoints.CREATE_BOOKING;
+import static org.api.testing.demo.utils.environments.Endpoints.CREATE_BOOKING;
 import static org.api.testing.demo.models.headers.GetHeaderModel.headersAuthentication;
 import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.andRequestBody;
 
