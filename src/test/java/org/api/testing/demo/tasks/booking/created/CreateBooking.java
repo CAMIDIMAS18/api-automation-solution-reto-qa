@@ -1,20 +1,28 @@
-package org.api.testing.demo.tasks.booking;
+package org.api.testing.demo.tasks.booking.created;
 
+import com.jayway.jsonpath.DocumentContext;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.thucydides.core.annotations.Step;
 import org.api.testing.demo.interactions.SendPostRequest;
+import org.api.testing.demo.utils.common.JsonUtils;
 
 import java.util.Map;
 
+import static net.serenitybdd.rest.SerenityRest.lastResponse;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static org.api.testing.demo.environments.Endpoints.CREATE_BOOKING;
 import static org.api.testing.demo.models.headers.GetHeaderModel.headersDefault;
 import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.andRequestBody;
+import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
+import static org.api.testing.demo.utils.common.JsonUtils.parseJsonObject;
+import static org.api.testing.demo.utils.constants.Constants.*;
 
 public class CreateBooking implements Task {
 
+    public static String response;
     private final Map<String, String> bookingInformation;
+
 
     public CreateBooking(Map<String, String> bookingInformation) {
         this.bookingInformation = bookingInformation;
@@ -39,5 +47,12 @@ public class CreateBooking implements Task {
                         .andAdditionalNeeds(bookingInformation.get("additionalneeds"))
                         .build()
         ));
+        response = lastResponse().getBody().prettyPrint();
+        DocumentContext documentContext = JsonUtils.parseDocumentContextFromString(response);
+        CAMILA.remember(RESPONSE_BODY, response);
+
+        Integer bookingId = parseJsonObject(lastResponse().getBody().asString()).get("bookingid").getAsInt();
+        CAMILA.remember(BOOKING_ID, bookingId);
+        System.out.println("*** bookingid: " + bookingId);
     }
 }

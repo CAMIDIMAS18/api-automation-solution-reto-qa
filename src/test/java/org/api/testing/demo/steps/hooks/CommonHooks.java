@@ -1,7 +1,9 @@
 package org.api.testing.demo.steps.hooks;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.DataTableType;
+import io.cucumber.java.Scenario;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.util.EnvironmentVariables;
@@ -9,7 +11,7 @@ import org.api.testing.demo.abilities.Authenticate;
 
 import static org.api.testing.demo.environments.Endpoints.BASE_URL;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
-import static org.api.testing.demo.utils.constants.Constants.THE_REST_API_BASE_URL;
+import static org.api.testing.demo.utils.constants.Constants.*;
 
 public class CommonHooks {
 
@@ -21,6 +23,11 @@ public class CommonHooks {
         CAMILA.remember(THE_REST_API_BASE_URL, BASE_URL);
         CAMILA.describedAs("un huésped que puede crear, consultar, actualizar y eliminar su reserva");
         CAMILA.whoCan(Authenticate.with("admin", "password123"));
+    }
+
+    @After
+    public void afterScenario(Scenario scenario) {
+        CAMILA.forget(BOOKING_DATA);
     }
 
     /**
