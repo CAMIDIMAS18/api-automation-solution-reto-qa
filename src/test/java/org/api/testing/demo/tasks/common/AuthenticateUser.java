@@ -1,4 +1,4 @@
-package org.api.testing.demo.tasks.booking;
+package org.api.testing.demo.tasks.common;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;

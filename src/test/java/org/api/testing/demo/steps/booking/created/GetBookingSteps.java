@@ -1,4 +1,4 @@
-package org.api.testing.demo.steps.booking;
+package org.api.testing.demo.steps.booking.created;
 
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;

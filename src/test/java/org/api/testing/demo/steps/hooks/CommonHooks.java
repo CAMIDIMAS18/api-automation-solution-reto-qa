@@ -27,7 +27,7 @@ public class CommonHooks {
 
     @After
     public void afterScenario(Scenario scenario) {
-        CAMILA.forget(BOOKING_DATA);
+        //CAMILA.forget(BOOKING_DATA);
     }
 
     /**
