@@ -38,7 +38,7 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
-          name: automation reports
+          name: testing-reports
           path: |
             target/site/serenity/serenity-summary.html
             target/site/serenity/results.csv
