@@ -41,4 +41,5 @@ jobs:
           name: automation reports
           path: |
             target/site/serenity/serenity-summary.html
+            target/site/serenity/results.csv
           retention-days: 1
