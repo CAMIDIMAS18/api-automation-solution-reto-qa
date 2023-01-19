@@ -1,11 +1,11 @@
-package org.api.testing.demo.questions.common;
+package org.api.testing.demo.questions.booking.create;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 
-public class GetValuesFromResponseBody implements Question {
+public class GetValuesFromResponseBody implements Question<Object> {
 
     private final String jsonPath;
 

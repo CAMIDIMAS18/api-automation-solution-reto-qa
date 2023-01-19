@@ -6,7 +6,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
-import static org.api.testing.demo.utils.constants.Constants.VALIDATION_SCHEMA;
+import static org.api.testing.demo.utils.constants.Constants.SUCCESSFUL_VALIDATION;
 
 @Subject("the response schema matches json schema defined in file '#fieldName'")
 public class GetExpectedJsonSchema implements Question<Boolean> {
@@ -27,7 +27,7 @@ public class GetExpectedJsonSchema implements Question<Boolean> {
     @Override
     public Boolean answeredBy(Actor actor) {
         actor.should(
-                seeThatResponse(VALIDATION_SCHEMA,
+                seeThatResponse(SUCCESSFUL_VALIDATION,
                         response -> response.assertThat()
                                 .body(matchesJsonSchemaInClasspath("schemas/" + fieldName + ".json"))
                 )

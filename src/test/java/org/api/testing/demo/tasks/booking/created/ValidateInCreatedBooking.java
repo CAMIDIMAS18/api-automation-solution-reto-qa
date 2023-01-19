@@ -4,17 +4,17 @@ import org.api.testing.demo.utils.exceptions.AssertionsServices;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.api.testing.demo.questions.common.GetValuesFromResponseBody.theAttributeValue;
+import static org.api.testing.demo.questions.booking.create.GetValuesFromResponseBody.theAttributeValue;
 import static org.hamcrest.Matchers.*;
 
-public class ValidateInCreatedBookingResponse {
-    private ValidateInCreatedBookingResponse() {
+public class ValidateInCreatedBooking {
+    private ValidateInCreatedBooking() {
         //Nothing
     }
 
     public static void thatBookingIdWasGenerated() {
         theActorInTheSpotlight().should(
-                seeThat("the booking Id", theAttributeValue("booking.firstname"), notNullValue())
+                seeThat("the booking Id", theAttributeValue("bookingid"), notNullValue())
                         .orComplainWith(AssertionsServices.class, AssertionsServices.THE_VALUES_SERVICE_IS_NOT_EXPECTED));
     }
 
