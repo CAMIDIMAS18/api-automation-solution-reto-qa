@@ -14,24 +14,24 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static org.api.testing.demo.utils.exceptions.AssertionsServices.EXCEPTION_ERROR_CONSUMPTION_SERVICE;
 import static org.api.testing.demo.utils.enums.HttpStatusCodes.OK;
 
-public class SendPostRequest implements Interaction {
+public class ExecutePostRequest implements Interaction {
 
     private final String endPoint;
     private final CreateBookingRequestBuilder requestModelBuilder;
-    private Map<String, String> headers;
+    private final Map<String, String> headers;
 
-    public SendPostRequest(String endPoint, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
+    public ExecutePostRequest(String endPoint, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
         this.endPoint = endPoint;
         this.headers = headers;
         this.requestModelBuilder = requestModelBuilder;
     }
 
-    public static SendPostRequest with(String endPoint, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
-        return instrumented(SendPostRequest.class, endPoint, headers, requestModelBuilder);
+    public static ExecutePostRequest with(String endPoint, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
+        return instrumented(ExecutePostRequest.class, endPoint, headers, requestModelBuilder);
     }
 
     @Override
-    @Step("se realiza la petición al servicio")
+    @Step("send a request to service")
     public <T extends Actor> void performAs(T actor) {
 
         SerenityRest.rest();
