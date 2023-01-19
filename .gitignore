@@ -53,6 +53,7 @@ build/
 
 ### VS Code ###
 .vscode/
+bin
 
 ### Mac OS ###
 .DS_Store

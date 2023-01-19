@@ -1,42 +1,41 @@
 # language: es
 
 @getBookings
-Necesidad del negocio: Consultar las reservaciones registradas
-
+Necesidad del negocio: Consultar las reservaciones agendadas
   Como usuario
   Quiero consultar la información de una reserva
   Para validar que la reservación se realizó correctamente
 
-  Regla de negocio: 1) Los parámetros de búsqueda permitidos son:
-  Id Booking, Customer Name, CheckIn/CheckOut Booking Date y/o All Bookings.
+  Regla: Los parámetros de búsqueda permitidos son: idBooking, firstname & lastname, Checkin to Checkout, All Bookings.
 
-    @getAllBookings #$.[?(@.bookingid == '9332')].bookingid
-    Escenario: Consultar todas las reservas existentes
-      Cuando ella consulte todas las reservas registradas en el sistema
-      Entonces podrá validar si su reserva se encuentra agendada
+    Antecedentes:
+      Dado que la cliente desea consultar la reservación de su próximo viaje
 
-    @getBookingName
-    Escenario: Consultar la existencia de una reservación por medio del nombre del cliente
-      Cuando el "consulte" con el parámetro "name"
-      Entonces debera comprobar que la información de la reserva encontrada es la correcta
+    @viewBookingDetails @integrationTest
+    Escenario: [YAPE-GB-002] Validar que se pueda consultar una reserva por su BookingId
+      Cuando ella filtre la consulta por el parámetro "ID Booking"
+      Entonces visualizará los detalles de la reserva
 
-    @getBookingDate
-    Escenario: Consultar la existencia de una reservación por medio de las fechas de reservación
-      Cuando el "consulte" con el parámetro "date"
-      Entonces debera comprobar que la información de la reserva encontrada es la correcta
+    @getAllBookings @integrationTest
+    Escenario: [YAPE-GB-003] Validar que se puedan consultar todas las reservas existentes
+      Cuando ella filtre la consulta por el parámetro "All Bookings"
+      Entonces visualizará el Id de su reserva
 
-    @getBookingAllIds
-    Escenario: Consultar la existencia de todas las reservaciones existentes
-      Cuando el "consulte" con el parámetro "allIds"
-      Entonces debera comprobar que su reserva se encuentra entre todas las reservaciones realizadas
+    @getBookingByCustomerNames @integrationTest
+    Escenario: [YAPE-GB-004] Validar que se pueda consultar una reserva por los nombres del cliente
+      Cuando ella filtre la consulta por el parámetro "Customer Names"
+      Entonces visualizará el Id de su reserva
 
-    @NotGetBooking
-    Esquema del escenario: No entregar información de una reserva no existente
-      Cuando el "consulte" la reserva con el parámetro <parameter> erroneo
-      Entonces no se deberá mostrar la información de la reserva
-      Ejemplos:
-        | parameter |
-        | Id        |
-        | name      |
-        | date      |
-        | allIds    |
+    @getBookingByDates @integrationTest
+    Escenario: [YAPE-GB-005] Validar que se pueda consultar una reserva por un rango de fechas especificas
+      Cuando ella filtre la consulta por el parámetro "Dates"
+      Entonces visualizará el Id de su reserva
+
+    @viewByBookingDates
+    Esquema del escenario: To view all the booking IDs by booking dates
+      Cuando ella filtre la consulta por el parámetro "Dates"
+      Entonces visualizará todos los bookingIDs encontrados
+    Ejemplos:
+    | checkin    | checkout   |
+    | 2018-01-01 | 2021-12-31 |
+    | 2010-01-01 | 2020-12-31 |
