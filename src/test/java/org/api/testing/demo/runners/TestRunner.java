@@ -10,14 +10,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(publish = true,
         features = "src/test/resources/features/booking",
         glue = "org.api.testing.demo.steps",
-        tags = "@createBooking",
+        tags = "@integrationTest",
         snippets = SnippetType.CAMELCASE)
 
 public class TestRunner {
-
-    /**
-     * @createBooking
-     * @getBookings
-     */
-
 }
