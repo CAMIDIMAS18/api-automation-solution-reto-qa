@@ -8,9 +8,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(publish = true,
-        features = "src/test/resources/features/booking",
+        features = "src/test/resources/features",
         glue = "org.api.testing.demo.steps",
-        tags = "@integrationTest",
+        tags = "@FunctionalTest",
         snippets = SnippetType.CAMELCASE)
 
 public class TestRunner {

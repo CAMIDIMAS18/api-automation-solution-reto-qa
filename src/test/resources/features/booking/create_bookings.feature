@@ -1,6 +1,6 @@
 # language: es
 
-@createBookings
+@createBooking
 Necesidad del negocio: Realizar la creación de una nueva reserva
   Como cliente
   Quiero hacer una nueva reserva
@@ -9,8 +9,8 @@ Necesidad del negocio: Realizar la creación de una nueva reserva
   Regla: Los campos firstname, lastname, totalprice, depositPaid, checkIn, checkOut, additionalNeeds,
   son obligatorios para crear una reserva
 
-    @createBooking @integrationTest
-    Esquema del escenario: [YAPE-CB-001] Validar la creación de una nueva reserva
+    @createBooking @FunctionalTest
+    Esquema del escenario: [YAPE-CB-002] Validar la creación de una nueva reserva
       Dado que la cliente desea crear la reservación de su próximo viaje
       Y se carga su información al sistema
         | firstname   | lastname   | totalprice   | depositpaid   | checkinDate   | checkoutDate   | additionalneeds   |

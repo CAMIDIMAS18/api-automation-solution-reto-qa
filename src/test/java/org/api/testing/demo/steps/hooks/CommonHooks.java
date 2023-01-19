@@ -1,13 +1,9 @@
 package org.api.testing.demo.steps.hooks;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.DataTableType;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.*;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.util.EnvironmentVariables;
-import org.api.testing.demo.abilities.Authenticate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +23,6 @@ public class CommonHooks {
         CAMILA.remember(THE_REST_API_BASE_URL, BASE_URL);
         CAMILA.remember(SCENARIO, scenario.getName());
         CAMILA.describedAs("un huésped que puede crear, consultar, actualizar y eliminar su reserva");
-        CAMILA.whoCan(Authenticate.with("admin", "password123"));
 
         LOG.info("*****************************************************************************************");
         LOG.info("	Scenario: " + scenario.getName());

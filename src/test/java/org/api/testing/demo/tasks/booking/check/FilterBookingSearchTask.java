@@ -28,7 +28,7 @@ public class FilterBookingSearchTask implements Task {
     }
 
     @Override
-    @Step("{0} query registered reservations, filtering by their names")
+    @Step("{0} query registered reservations, filtering by the parameters")
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(ExecuteGetRequestWithPathParams
                 .with(

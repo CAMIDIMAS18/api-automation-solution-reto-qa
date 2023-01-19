@@ -3,10 +3,13 @@ package org.api.testing.demo.steps.booking.check;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
 import org.api.testing.demo.questions.booking.check.TheQueryFieldsAndValuesAre;
-import org.api.testing.demo.tasks.booking.check.FilterBookingSearchTask;
 import org.api.testing.demo.tasks.booking.check.ConsultTheBookingsTask;
+import org.api.testing.demo.tasks.booking.check.FilterBookingSearchTask;
 import org.api.testing.demo.utils.exceptions.AssertionsServices;
 import org.api.testing.demo.utils.exceptions.NotQueryParameterFoundException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
@@ -80,5 +83,26 @@ public class GetBookingSteps {
         theActorInTheSpotlight().should(
                 seeThat("the value of booking Id", theBookingId(bookingId), is(equalTo(bookingId)))
                         .orComplainWith(AssertionsServices.class, AssertionsServices.THE_VALUES_SERVICE_IS_NOT_EXPECTED));
+    }
+
+    @Cuando("ella filtre la consulta por las fechas entre {string} a {string}")
+    public void getScheduledReservationsByDates(String checkin, String checkout) {
+        Map<String, Object> hashMapParams = new HashMap<>();
+        hashMapParams.put("checkin", checkin);
+        hashMapParams.put("checkout", checkout);
+
+        theActorInTheSpotlight().attemptsTo(FilterBookingSearchTask.withParams(GET_BOOKING_BY_DATES, hashMapParams));
+    }
+
+    @Entonces("visualizará todos los bookingIDs encontrados para el rango de fechas")
+    public void validateAllBookingIds() {
+        theActorInTheSpotlight().should(seeThat(httpResponseStatusCodeIs(), equalTo(OK.getHttpStatusCode()))
+                .orComplainWith(AssertionError.class, THE_STATUS_CODE_SERVICE_IS_NOT_EXPECTED));
+
+        theActorInTheSpotlight().should(seeThat(responseTimeIs(), lessThanOrEqualTo(15000L))
+                .orComplainWith(AssertionError.class, THE_RESPONSE_TIME_SERVICE_IS_NOT_EXPECTED));
+
+        theActorInTheSpotlight().should(seeThat(theJsonSchemaExpectIs(GET_ALL_BOOKINGS_SCHEMA))
+                .orComplainWith(AssertionError.class, THE_SCHEMA_SERVICE_IS_NOT_EXPECTED));
     }
 }

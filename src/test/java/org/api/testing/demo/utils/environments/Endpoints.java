@@ -15,6 +15,8 @@ public class Endpoints {
     public static final String PARTIAL_UPDATE_BOOKING = setEndpoint("partialUpdateBooking");
     public static final String DELETE_BOOKING = setEndpoint("deleteBooking");
     public static final String HEALTH_CHECK = setEndpoint("healthCheckApi");
+    public static final String USER_NAME = setEndpoint("username");
+    public static final String PASSWORD = setEndpoint("password");
 
     private Endpoints() {
         //Nothing

@@ -22,6 +22,7 @@ public class Constants {
     public static final String CREATE_BOOKING_SHEMA = "PostJsonSchema";
     public static final String GET_ALL_BOOKINGS_SCHEMA = "GetAllBookingsSchema";
     public static final String GET_BOOKING_DETAILS_SCHEMA = "GetBookingDetailsSchema";
+    public static final String AUTH_SHEMA = "AuthSchema";
 
     private Constants() {
         //Nothing
