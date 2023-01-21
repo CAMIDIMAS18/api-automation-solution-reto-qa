@@ -1,6 +1,5 @@
 package org.api.testing.demo.tasks.booking.created;
 
-import com.jayway.jsonpath.DocumentContext;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.thucydides.core.annotations.Step;
@@ -15,10 +14,8 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static org.api.testing.demo.models.headers.GetHeaderModel.headersDefault;
 import static org.api.testing.demo.models.request.CreateBookingRequestBuilder.Builder.andRequestBody;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
-import static org.api.testing.demo.utils.common.JsonUtils.parseDocumentContextFromString;
 import static org.api.testing.demo.utils.common.JsonUtils.parseJsonObject;
 import static org.api.testing.demo.utils.constants.Constants.BOOKING_ID;
-import static org.api.testing.demo.utils.constants.Constants.RESPONSE_BODY;
 import static org.api.testing.demo.utils.environments.Endpoints.CREATE_BOOKING;
 
 public class CreateBookingTask implements Task {
@@ -49,9 +46,7 @@ public class CreateBookingTask implements Task {
                         .build()
         ));
         LOGGER.info("Response Body Is: ");
-        String response = lastResponse().getBody().prettyPrint();
-        DocumentContext documentContextResponse = parseDocumentContextFromString(response);
-        CAMILA.remember(RESPONSE_BODY, documentContextResponse);
+        lastResponse().getBody().prettyPeek();
 
         Integer bookingId = parseJsonObject(lastResponse().getBody().asString()).get("bookingid").getAsInt();
         LOGGER.info("Booking Id is: {}", bookingId);

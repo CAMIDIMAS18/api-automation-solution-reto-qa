@@ -1,6 +1,5 @@
-package org.api.testing.demo.tasks.booking.update;
+package org.api.testing.demo.tasks.common;
 
-import com.jayway.jsonpath.DocumentContext;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.thucydides.core.annotations.Step;
@@ -13,9 +12,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static org.api.testing.demo.models.headers.GetHeaderModel.headersDefault;
 import static org.api.testing.demo.models.request.CreateTokenBuilder.Builder.andRequestBody;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
-import static org.api.testing.demo.utils.common.JsonUtils.parseDocumentContextFromString;
 import static org.api.testing.demo.utils.common.JsonUtils.parseJsonObject;
-import static org.api.testing.demo.utils.constants.Constants.RESPONSE_BODY;
 import static org.api.testing.demo.utils.constants.Constants.TOKEN;
 import static org.api.testing.demo.utils.environments.Endpoints.*;
 
@@ -41,9 +38,7 @@ public class CreateTokenTask implements Task {
                         .build()
         ));
         LOGGER.info("Response Body Is: ");
-        String response = lastResponse().getBody().prettyPrint();
-        DocumentContext documentContextResponse = parseDocumentContextFromString(response);
-        CAMILA.remember(RESPONSE_BODY, documentContextResponse);
+        lastResponse().getBody().prettyPeek();
 
         String token = parseJsonObject(lastResponse().getBody().asString()).get("token").getAsString();
         LOGGER.info("token is: {}", token);
