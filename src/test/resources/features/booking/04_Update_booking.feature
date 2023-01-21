@@ -8,7 +8,7 @@ Necesidad del negocio: Actualizar una reserva
 
   Regla de negocio: Para actualizar la información de la reserva, el cliente debe estar autenticado.
 
-    @FunctionalTest @PUT @Pending
+    @FunctionalTest
     Regla: Se deben enviar todos los campos de la reservación
     Esquema del escenario: [YAPE-UD-010] Validar la actualización de una reserva actual
       Dado que la cliente desea actualizar la reservación de su próximo viaje
@@ -17,16 +17,15 @@ Necesidad del negocio: Actualizar una reserva
         | <firstname> | <lastname> | <totalprice> | <depositpaid> | <checkinDate> | <checkoutDate> | <additionalneeds> |
       Entonces visualizará los detalles de la reserva con su nueva información
       Ejemplos:
-        | firstname | lastname | totalprice | depositpaid | checkinDate | checkoutDate | additionalneeds      |
-        | Camila    | Dimas    | 0          | true        | 2023-01-27  | 2023-02-07   | Breakfast and Dinner |
+        | firstname | lastname | totalprice | depositpaid | checkinDate | checkoutDate | additionalneeds              |
+        | Camila    | Dimax    | 2000       | true        | 2024-11-01  | 2024-12-09   | Breakfast, dinner and snacks |
 
-
-    @FunctionalTest @PATCH @Pending
+    @FunctionalTest
     Regla: No se tienen campos mínimos para enviar la solicitud
     Esquema del escenario:[YAPE-UD-011] Validar la actualización parcial una reserva actual
       Dado que la cliente desea actualizar la reservación de su próximo viaje
       Cuando ella solicita la actualización para la fecha de ingreso '<checkIn>' & la fecha de salida '<checkOut>'
-      Entonces visualizará los detalles de la reserva con su nueva información
+      Entonces visualizará los campos de la reserva con la nueva información
       Ejemplos:
         | checkIn    | checkOut   |
         | 2023-01-27 | 2023-02-07 |

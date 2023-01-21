@@ -19,4 +19,4 @@ Necesidad del negocio: Crear una reserva
       Entonces su solicitud se creará en el sistema con su información y un número de registro único
       Ejemplos:
         | firstname | lastname | totalprice | depositpaid | checkinDate | checkoutDate | additionalneeds |
-        | Juanito   | Camargo  | 100000     | true        | 2025-01-07  | 2025-01-07   | Breakfast       |
+        | Camila    | DimassX  | 1000       | true        | 2025-01-07  | 2025-01-07   | Breakfast       |

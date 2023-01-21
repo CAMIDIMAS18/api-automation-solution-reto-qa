@@ -6,7 +6,8 @@ Necesidad del negocio: Confirmar funcionamiento de la api
   Quiero hacer una verificación de estado simple
   Para confirmar si la api restful-booker se encuentra en funcionamiento
 
-  @FunctionalTest @GET @Pending
+  @FunctionalTest
+    # status code: 201
   Escenario: [YAPE-HC-001] Confirmar si la api está en funcionamiento
     Dado que se requiere confirmar que la api funcione correctamente
     Cuando realizo una solicitud para comprobar la salud del servicio de reservas

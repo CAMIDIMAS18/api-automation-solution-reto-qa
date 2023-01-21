@@ -8,7 +8,7 @@ Necesidad del negocio: Generar token de autenticación
 
   Regla: El token expira cada 10 minutos
 
-    @FunctionalTest @POST @Pending
+    @FunctionalTest
     Escenario: [YAPE-AU-002] Validar la creación de token de autenticación
       Dado que la cliente desea crear la reservación de su próximo viaje
       Cuando ella ingrese sus credenciales de acceso

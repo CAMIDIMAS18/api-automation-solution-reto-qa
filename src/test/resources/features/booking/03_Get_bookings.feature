@@ -30,7 +30,7 @@ Necesidad del negocio: Consultar una reserva
     Escenario: [YAPE-GB-007] Validar que se pueda consultar una reserva por un rango de fechas especificas
       Cuando ella filtre la consulta por el parámetro "Dates"
       Entonces visualizará todos los bookingIDs encontrados para el rango de fechas
-      #Entonces visualizará el Id de su reserva
+      #Entonces visualizará el Id de su reserva (BUG)
 
     @getBookingBySpecificDates @FunctionalTest
     Esquema del escenario: [YAPE-GB-008] Ver todos los IDs de las reservas consultando por fechas especificas

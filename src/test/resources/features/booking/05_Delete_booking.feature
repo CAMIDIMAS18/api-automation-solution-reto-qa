@@ -8,7 +8,7 @@ Necesidad del negocio: Eliminar una reserva
 
   Regla de negocio: Para eliminar la información de la reserva, el cliente debe estar autenticado.
 
-    @FunctionalTest @DELETE @Pending
+    @FunctionalTest
     Escenario: [YAPE-DL-009] Validar la eliminación de una reserva actual
       Dado que la cliente desea eliminar la reservación de su próximo viaje
       Cuando ella solicite la eliminación con su código único de reserva
