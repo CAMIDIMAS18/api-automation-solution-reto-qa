@@ -5,27 +5,25 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.rest.interactions.Patch;
-import org.api.testing.demo.utils.exceptions.GenericRuntimeException;
+import org.api.testing.demo.models.request.CreateBookingRequestBuilder;
 
 import java.util.Map;
 
-import static org.api.testing.demo.utils.enums.HttpStatusCodes.OK;
 import static org.api.testing.demo.utils.environments.Endpoints.PARTIAL_UPDATE_BOOKING;
-import static org.api.testing.demo.utils.exceptions.AssertionsServices.EXCEPTION_ERROR_CONSUMPTION_SERVICE;
 
 public class ExecutePatchRequest implements Interaction {
-    private final String body;
+    private final CreateBookingRequestBuilder requestModelBuilder;
     private final int id;
     private final Map<String, String> headers;
 
-    public ExecutePatchRequest(String resource, String body, int id, Map<String, String> headers) {
+    public ExecutePatchRequest(int id, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
         this.id = id;
         this.headers = headers;
-        this.body = body;
+        this.requestModelBuilder = requestModelBuilder;
     }
 
-    public static ExecutePatchRequest with(int id, Map<String, String> headers, String body) {
-        return Tasks.instrumented(ExecutePatchRequest.class, id, headers, body);
+    public static ExecutePatchRequest with(int id, Map<String, String> headers, CreateBookingRequestBuilder requestModelBuilder) {
+        return Tasks.instrumented(ExecutePatchRequest.class, id, headers, requestModelBuilder);
     }
 
     @Override
@@ -35,13 +33,9 @@ public class ExecutePatchRequest implements Interaction {
                 Patch.to(PARTIAL_UPDATE_BOOKING + "/" + id)
                         .with(requestSpecification -> requestSpecification
                                 .headers(headers)
-                                .body(body)
+                                .body(requestModelBuilder.getRequestBody())
                                 .relaxedHTTPSValidation()
                                 .log().all())
         );
-
-        if (SerenityRest.lastResponse().statusCode() != OK.getHttpStatusCode()) {
-            throw new GenericRuntimeException(EXCEPTION_ERROR_CONSUMPTION_SERVICE);
-        }
     }
 }
