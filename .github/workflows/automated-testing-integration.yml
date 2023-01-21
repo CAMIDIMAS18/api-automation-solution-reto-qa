@@ -25,12 +25,13 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
       - name: Run integration test
-        uses: ./gradlew build
-
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: check
       - name: Generate reports
         run: ./gradlew reports
 
