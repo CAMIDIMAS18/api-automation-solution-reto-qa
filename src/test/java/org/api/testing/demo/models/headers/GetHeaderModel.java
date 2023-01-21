@@ -20,9 +20,11 @@ public class GetHeaderModel {
     }
 
     public static Map<String, String> headersAuthentication() {
+        String token = "token=" + CAMILA.recall(TOKEN);
+
         headers.put(HeaderValueModel.CONTENT_TYPE.getHeader(), HeaderValueModel.CONTENT_TYPE.getValue());
         headers.put(HeaderValueModel.ACCEPT.getHeader(), HeaderValueModel.ACCEPT.getValue());
-        headers.put(HeaderValueModel.COOKIE.getHeader(), CAMILA.recall(TOKEN));
+        headers.put(HeaderValueModel.COOKIE.getHeader(), token);
         return headers;
     }
 }

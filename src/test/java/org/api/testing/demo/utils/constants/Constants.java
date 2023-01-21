@@ -7,6 +7,9 @@ public class Constants {
      */
     public static final String BOOKING_ID = "Id booking";
     public static final String BOOKING_DATA = "Booking data";
+    public static final String CHECKIN_DATE = "checkIn";
+    public static final String CHECKOUT_DATE = "checkOut";
+    public static final String CREATED_MESSAGE = "Created";
     public static final String PATH_PARAMS_WITH_NAMES = "path params with custom names";
     public static final String PATH_PARAMS_WITH_DATES = "path params with dates";
     public static final String THE_REST_API_BASE_URL = "The base url";
