@@ -1,7 +1,7 @@
 # language: es
 
 @getBookings
-Necesidad del negocio: Consultar las reservaciones agendadas
+Necesidad del negocio: Consultar una reserva
   Como usuario
   Quiero consultar la información de una reserva
   Para validar que la reservación se realizó correctamente

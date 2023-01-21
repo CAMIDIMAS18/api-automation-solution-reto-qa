@@ -1,7 +1,7 @@
 # language: es
 
 @deleteBooking
-Necesidad del negocio: Eliminar las reservas agendadas
+Necesidad del negocio: Eliminar una reserva
   Como cliente
   Quiero eliminar mi reserva agenda
   Para poder cancelar la reservación en cualquier momento

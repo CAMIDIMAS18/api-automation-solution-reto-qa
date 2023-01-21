@@ -1,7 +1,7 @@
 # language: es
 
 @updateBooking
-Necesidad del negocio: Actualizar las reservas agendadas
+Necesidad del negocio: Actualizar una reserva
   Como cliente
   Quiero actualizar la información de mi reserva
   Para poder actualizar y eliminar reservas

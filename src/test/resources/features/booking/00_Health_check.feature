@@ -1,7 +1,7 @@
 # language: es
 
 @healthCheck
-Necesidad del negocio: Confirmar si la api está en funcionamiento
+Necesidad del negocio: Confirmar funcionamiento de la api
   Yo como tester
   Quiero hacer una verificación de estado simple
   Para confirmar si la api restful-booker se encuentra en funcionamiento

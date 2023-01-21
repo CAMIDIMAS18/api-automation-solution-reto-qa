@@ -1,7 +1,7 @@
 # language: es
 
 @createBooking
-Necesidad del negocio: Crear una nueva reserva
+Necesidad del negocio: Crear una reserva
   Como cliente
   Quiero hacer una nueva reserva
   Para poder programar mi próximo viaje

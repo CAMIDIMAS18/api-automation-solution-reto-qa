@@ -1,7 +1,7 @@
 # language: es
 
 @createToken
-Necesidad del negocio: Crear un nuevo token de autenticación
+Necesidad del negocio: Generar token de autenticación
   Como cliente
   Quiero autenticarme en el sistema
   Para poder actualizar y eliminar reservas
