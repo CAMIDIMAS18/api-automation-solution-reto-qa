@@ -1,4 +1,4 @@
-package org.api.testing.demo.questions.booking.check;
+package org.api.testing.demo.questions.common;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;

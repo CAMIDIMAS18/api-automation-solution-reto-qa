@@ -9,15 +9,12 @@ import java.util.concurrent.TimeUnit;
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 
 @Subject("the response time of the request")
-public class GetResponseTime implements Question<Long> {
+public class ResponseTimeQuestion implements Question<Long> {
 
-    public static GetResponseTime responseTimeIs() {
-        return new GetResponseTime();
+    public static ResponseTimeQuestion responseTimeIs() {
+        return new ResponseTimeQuestion();
     }
 
-    /**
-     * Obtiene el tiempo de respuesta
-     */
     @Override
     public Long answeredBy(Actor actor) {
         return lastResponse().getTimeIn(TimeUnit.MILLISECONDS);

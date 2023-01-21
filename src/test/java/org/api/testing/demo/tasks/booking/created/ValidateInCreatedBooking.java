@@ -4,7 +4,7 @@ import org.api.testing.demo.utils.exceptions.AssertionsServices;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.api.testing.demo.questions.booking.create.GetValuesFromResponseBody.theAttributeValue;
+import static org.api.testing.demo.questions.common.GetValueFromResponseBodyQuestion.theAttributeValue;
 import static org.hamcrest.Matchers.*;
 
 public class ValidateInCreatedBooking {

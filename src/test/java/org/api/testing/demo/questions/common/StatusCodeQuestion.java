@@ -7,15 +7,12 @@ import net.serenitybdd.screenplay.annotations.Subject;
 import static net.serenitybdd.rest.SerenityRest.lastResponse;
 
 @Subject("the status code of the response")
-public class GetStatusCode implements Question<Integer> {
+public class StatusCodeQuestion implements Question<Integer> {
 
-    public static GetStatusCode httpResponseStatusCodeIs() {
-        return new GetStatusCode();
+    public static StatusCodeQuestion httpResponseStatusCodeIs() {
+        return new StatusCodeQuestion();
     }
 
-    /**
-     * Obtiene el código de estado HTTP de la respuesta
-     */
     @Override
     public Integer answeredBy(Actor actor) {
         return lastResponse().getStatusCode();

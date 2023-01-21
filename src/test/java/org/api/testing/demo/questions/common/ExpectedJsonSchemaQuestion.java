@@ -9,21 +9,18 @@ import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeT
 import static org.api.testing.demo.utils.constants.Constants.SUCCESSFUL_VALIDATION;
 
 @Subject("the response schema matches json schema defined in file '#fieldName'")
-public class GetExpectedJsonSchema implements Question<Boolean> {
+public class ExpectedJsonSchemaQuestion implements Question<Boolean> {
 
     private final String fieldName;
 
-    public GetExpectedJsonSchema(String fieldName) {
+    public ExpectedJsonSchemaQuestion(String fieldName) {
         this.fieldName = fieldName;
     }
 
-    public static GetExpectedJsonSchema theJsonSchemaExpectIs(String fieldName) {
-        return new GetExpectedJsonSchema(fieldName);
+    public static ExpectedJsonSchemaQuestion theJsonSchemaExpectIs(String fieldName) {
+        return new ExpectedJsonSchemaQuestion(fieldName);
     }
 
-    /**
-     * Obtiene el esquema de la respuesta y compara con respecto al definido
-     */
     @Override
     public Boolean answeredBy(Actor actor) {
         actor.should(
