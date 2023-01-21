@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(publish = true,
-        features = "src/test/resources/features",
+        features = "src/test/resources/features/unHappyPaths",
         glue = "org.api.testing.demo.steps",
-        tags = "@FunctionalTest",
+        tags = "@UnHappyPaths",
         snippets = SnippetType.CAMELCASE)
 
-public class TestRunner {
+public class TestWithUnHappyPathsRunner {
 }

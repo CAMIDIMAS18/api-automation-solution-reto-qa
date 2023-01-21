@@ -25,15 +25,15 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Run test with gradle
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        with:
-          arguments: test
-      - uses: gradle/gradle-build-action@v2
-        with:
-          arguments: check
+
+      - name: Run integration test
+        uses: ./gradlew build
+
       - name: Generate reports
         run: ./gradlew reports
+
       - name: Upload reports automation testing
         if: ${{ always() }}
         uses: actions/upload-artifact@v3
