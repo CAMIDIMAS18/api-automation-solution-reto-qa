@@ -2,9 +2,8 @@ package org.api.testing.demo.steps.booking.check;
 
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
-import org.api.testing.demo.questions.booking.check.TheQueryFieldsAndValuesAre;
-import org.api.testing.demo.tasks.booking.check.ConsultTheBookingsTask;
-import org.api.testing.demo.tasks.booking.check.FilterBookingSearchTask;
+import org.api.testing.demo.questions.common.TheQueryFieldsAndValuesAre;
+import org.api.testing.demo.tasks.common.ConsumeGetTask;
 import org.api.testing.demo.utils.exceptions.AssertionsServices;
 import org.api.testing.demo.utils.exceptions.NotQueryParameterFoundException;
 
@@ -14,10 +13,11 @@ import java.util.Map;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.api.testing.demo.questions.booking.check.TheBookingIdIs.theBookingId;
-import static org.api.testing.demo.questions.common.GetExpectedJsonSchema.theJsonSchemaExpectIs;
-import static org.api.testing.demo.questions.common.GetResponseTime.responseTimeIs;
-import static org.api.testing.demo.questions.common.GetStatusCode.httpResponseStatusCodeIs;
+import static org.api.testing.demo.questions.common.ExpectedJsonSchemaQuestion.theJsonSchemaExpectIs;
+import static org.api.testing.demo.questions.common.ResponseTimeQuestion.responseTimeIs;
+import static org.api.testing.demo.questions.common.StatusCodeQuestion.httpResponseStatusCodeIs;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
+import static org.api.testing.demo.tasks.common.ConsumeGetWithPathParamsTask.consumeGetWithPathParams;
 import static org.api.testing.demo.utils.constants.Constants.*;
 import static org.api.testing.demo.utils.enums.HttpStatusCodes.OK;
 import static org.api.testing.demo.utils.environments.Endpoints.*;
@@ -30,28 +30,28 @@ public class GetBookingSteps {
 
         switch (queryParametersOption) {
             case "All Bookings":
-                theActorInTheSpotlight().attemptsTo(ConsultTheBookingsTask.with(GET_ALL_BOOKINGS));
+                theActorInTheSpotlight().attemptsTo(ConsumeGetTask.with(GET_ALL_BOOKINGS));
 
                 theActorInTheSpotlight().should(seeThat(theJsonSchemaExpectIs(GET_ALL_BOOKINGS_SCHEMA))
                         .orComplainWith(AssertionError.class, THE_SCHEMA_SERVICE_IS_NOT_EXPECTED));
                 break;
 
             case "ID Booking":
-                theActorInTheSpotlight().attemptsTo(ConsultTheBookingsTask.with(GET_BOOKING_BY_ID + CAMILA.recall(BOOKING_ID)));
+                theActorInTheSpotlight().attemptsTo(ConsumeGetTask.with(GET_BOOKING_BY_ID + CAMILA.recall(BOOKING_ID)));
 
                 theActorInTheSpotlight().should(seeThat(theJsonSchemaExpectIs(GET_BOOKING_DETAILS_SCHEMA))
                         .orComplainWith(AssertionError.class, THE_SCHEMA_SERVICE_IS_NOT_EXPECTED));
                 break;
 
             case "Customer Names":
-                theActorInTheSpotlight().attemptsTo(FilterBookingSearchTask.withParams(GET_BOOKING_BY_CUSTOM_NAMES, CAMILA.recall(PATH_PARAMS_WITH_NAMES)));
+                theActorInTheSpotlight().attemptsTo(consumeGetWithPathParams(GET_BOOKING_BY_CUSTOM_NAMES, CAMILA.recall(PATH_PARAMS_WITH_NAMES)));
 
                 theActorInTheSpotlight().should(seeThat(theJsonSchemaExpectIs(GET_ALL_BOOKINGS_SCHEMA))
                         .orComplainWith(AssertionError.class, THE_SCHEMA_SERVICE_IS_NOT_EXPECTED));
                 break;
 
             case "Dates":
-                theActorInTheSpotlight().attemptsTo(FilterBookingSearchTask.withParams(GET_BOOKING_BY_DATES, CAMILA.recall(PATH_PARAMS_WITH_DATES)));
+                theActorInTheSpotlight().attemptsTo(consumeGetWithPathParams(GET_BOOKING_BY_DATES, CAMILA.recall(PATH_PARAMS_WITH_DATES)));
 
                 theActorInTheSpotlight().should(seeThat(theJsonSchemaExpectIs(GET_ALL_BOOKINGS_SCHEMA))
                         .orComplainWith(AssertionError.class, THE_SCHEMA_SERVICE_IS_NOT_EXPECTED));
@@ -91,7 +91,7 @@ public class GetBookingSteps {
         hashMapParams.put("checkin", checkin);
         hashMapParams.put("checkout", checkout);
 
-        theActorInTheSpotlight().attemptsTo(FilterBookingSearchTask.withParams(GET_BOOKING_BY_DATES, hashMapParams));
+        theActorInTheSpotlight().attemptsTo(consumeGetWithPathParams(GET_BOOKING_BY_DATES, hashMapParams));
     }
 
     @Entonces("visualizará todos los bookingIDs encontrados para el rango de fechas")

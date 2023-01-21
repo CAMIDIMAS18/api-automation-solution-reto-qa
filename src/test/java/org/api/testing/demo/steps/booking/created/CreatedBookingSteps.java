@@ -11,9 +11,9 @@ import java.util.Map;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.api.testing.demo.questions.common.GetExpectedJsonSchema.theJsonSchemaExpectIs;
-import static org.api.testing.demo.questions.common.GetResponseTime.responseTimeIs;
-import static org.api.testing.demo.questions.common.GetStatusCode.httpResponseStatusCodeIs;
+import static org.api.testing.demo.questions.common.ExpectedJsonSchemaQuestion.theJsonSchemaExpectIs;
+import static org.api.testing.demo.questions.common.ResponseTimeQuestion.responseTimeIs;
+import static org.api.testing.demo.questions.common.StatusCodeQuestion.httpResponseStatusCodeIs;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
 import static org.api.testing.demo.utils.constants.Constants.BOOKING_DATA;
 import static org.api.testing.demo.utils.constants.Constants.CREATE_BOOKING_SHEMA;
@@ -45,12 +45,12 @@ public class CreatedBookingSteps {
     @Entonces("su solicitud se creará en el sistema con su información y un número de registro único")
     public void validateServiceResponse() {
         ValidateInCreatedBooking.thatBookingIdWasGenerated();
-        ValidateInCreatedBooking.thatFirstNameIs((String) BookingData.getData().get("firstname"));
-        ValidateInCreatedBooking.thatLastNameIs((String) BookingData.getData().get("lastname"));
-        ValidateInCreatedBooking.thatTotalPriceIs((String) BookingData.getData().get("totalprice"));
-        ValidateInCreatedBooking.thatDepositPaidIs((String) BookingData.getData().get("depositpaid"));
-        ValidateInCreatedBooking.thatCheckInDateIs((String) BookingData.getData().get("checkinDate"));
-        ValidateInCreatedBooking.thatCheckOutDateIs((String) BookingData.getData().get("checkoutDate"));
-        ValidateInCreatedBooking.thatAdditionalNeedsIs((String) BookingData.getData().get("additionalneeds"));
+        ValidateInCreatedBooking.thatFirstNameIs(BookingData.getData().get("firstname").toString());
+        ValidateInCreatedBooking.thatLastNameIs(BookingData.getData().get("lastname").toString());
+        ValidateInCreatedBooking.thatTotalPriceIs(BookingData.getData().get("totalprice").toString());
+        ValidateInCreatedBooking.thatDepositPaidIs(BookingData.getData().get("depositpaid").toString());
+        ValidateInCreatedBooking.thatCheckInDateIs(BookingData.getData().get("checkinDate").toString());
+        ValidateInCreatedBooking.thatCheckOutDateIs(BookingData.getData().get("checkoutDate").toString());
+        ValidateInCreatedBooking.thatAdditionalNeedsIs(BookingData.getData().get("additionalneeds").toString());
     }
 }

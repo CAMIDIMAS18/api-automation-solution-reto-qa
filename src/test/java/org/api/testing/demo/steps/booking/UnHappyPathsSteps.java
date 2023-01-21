@@ -3,7 +3,7 @@ package org.api.testing.demo.steps.booking;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
 import io.cucumber.java.es.Pero;
-import org.api.testing.demo.tasks.booking.check.ConsultTheBookingsTask;
+import org.api.testing.demo.tasks.common.ConsumeGetTask;
 import org.api.testing.demo.utils.exceptions.NotQueryParameterFoundException;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
@@ -31,7 +31,7 @@ public class UnHappyPathsSteps {
     public void ellaConsulteElDeSuReserva() {
 
         System.out.println("Realizar consultar con el booking ID eliminado");
-        theActorInTheSpotlight().attemptsTo(ConsultTheBookingsTask.with(GET_BOOKING_BY_ID + CAMILA.recall(BOOKING_ID)));
+        theActorInTheSpotlight().attemptsTo(ConsumeGetTask.with(GET_BOOKING_BY_ID + CAMILA.recall(BOOKING_ID)));
 
     }
 
