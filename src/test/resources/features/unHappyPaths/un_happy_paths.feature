@@ -8,14 +8,14 @@ Necesidad del negocio: Validar que no se puedan crear/consultar/actualizar/elimi
 
   @notCreatedBooking @Pending
     #Status code: 500 Internal Server Error
-  Escenario: [YAPE-UHP-001] Validar que no se pueda crear un reserva al no enviar un campo obligatorio
+  Escenario: [YP-012] Validar que no se pueda crear un reserva al no enviar un campo obligatorio
     Dado que la cliente desea crear la reservación de su próximo viaje
     Pero ella no envió un campo obligatorio en la información solicitada
     Entonces no se deberá crear la reserva en el sistema
 
   @notGetBookingDetails @Pending
     # status code: 404 Not Found
-  Escenario: [YAPE-UHP-002] Validar que no se pueda consultar una reserva eliminada
+  Escenario: [YP-013] Validar que no se pueda consultar una reserva eliminada
     Dado que la cliente desea consultar la reservación de su próximo viaje
     Pero la reservación fue eliminada previamente
     Cuando ella consulte el ID de su reserva
@@ -23,7 +23,7 @@ Necesidad del negocio: Validar que no se puedan crear/consultar/actualizar/elimi
 
   @notUpdateBooking @Pending
     # status code: 405 Method Not Allowed
-  Escenario: [YAPE-UHP-003] Validar que no se pueda actualizar una reserva eliminada
+  Escenario: [YP-014] Validar que no se pueda actualizar una reserva eliminada
     Dado que la cliente desea actualizar la reservación de su próximo viaje
     Pero la reservación fue eliminada previamente
     Cuando ella ingrese todos los datos de su reserva con las actualizaciones deseadas
@@ -33,7 +33,7 @@ Necesidad del negocio: Validar que no se puedan crear/consultar/actualizar/elimi
 
   @notDeleteBooking @Pending
     # status code: 403 Forbidden
-  Escenario: [YAPE-UHP-004] Validar que no se pueda elimar una reserva sin estar autenticado
+  Escenario: [YP-015] Validar que no se pueda eliminar una reserva sin estar autenticado
     Dado que la cliente desea eliminar la reservación de su próximo viaje
     Pero no se autenticó correctamente en el sistema
     Cuando ella solicite la eliminación con su código único de reserva

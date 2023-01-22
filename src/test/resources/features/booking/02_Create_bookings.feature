@@ -9,8 +9,8 @@ Necesidad del negocio: Crear una reserva
   Regla: Los campos firstname, lastname, totalprice, depositPaid, checkIn, checkOut, additionalNeeds,
   son obligatorios para crear una reserva
 
-    @FunctionalTest @POST
-    Esquema del escenario: [YAPE-CB-003] Validar la creación de una nueva reserva
+    @integrationTest
+    Esquema del escenario: [YP-003] Validar la creación de una nueva reserva
       Dado que la cliente desea crear la reservación de su próximo viaje
       Y se carga su información al sistema
         | firstname   | lastname   | totalprice   | depositpaid   | checkinDate   | checkoutDate   | additionalneeds   |
