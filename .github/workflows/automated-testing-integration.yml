@@ -1,0 +1,46 @@
+name: automated-testing-integration
+
+on:
+  push:
+    branches:
+      - develop
+
+  schedule:
+    - cron: "00 13 * * TUE"
+  workflow_dispatch:
+
+env:
+  project_name: "api-automation-solution-reto-qa"
+  language: "java"
+
+jobs:
+  integration-api-test:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Run integration test
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: check
+      - name: Generate reports
+        run: ./gradlew reports
+
+      - name: Upload reports automation testing
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: testing-reports
+          path: |
+            target/site/serenity/serenity-summary.html
+            target/site/serenity/results.csv
+          retention-days: 1

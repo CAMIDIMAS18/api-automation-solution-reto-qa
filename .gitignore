@@ -3,7 +3,6 @@ target/
 !target/cucumber/failed_scenarios.txt
 !target/site/serenity/serenity-summary.html
 !target/site/serenity/results.csv
-test-integration.txt
 
 ### Enviroment variables ###
 .env
@@ -54,6 +53,7 @@ build/
 
 ### VS Code ###
 .vscode/
+bin
 
 ### Mac OS ###
 .DS_Store
