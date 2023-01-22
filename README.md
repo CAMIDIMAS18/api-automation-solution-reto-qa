@@ -131,28 +131,28 @@ de diseño de Screenplay:
 
 ```Gherkin
 src
-+ main                                  | Source main
-+ test                                  |
-+ java                                | Test runners and supporting code
-+ org.api.testing.demo                | Package base
-+ assertions                        | Assertions of the test
-+ interactions                      | Simple interaction class for REST requests.
-+ model                             | DTOs, Pojos, Builders, etc ...
-+ questions                         | Different types of test validation questions
-+ runners                           | Responsible for executing feature scenario
-+ steps                             | Sets of test steps
-+ {feature_name}                  | Feature name
-+ booking                       | Utility class for definition steps
-+ hooks                         | Definition of Hooks
-+ tasks                             | High-level actions that define a set of actor interactions
-+ utils                             | General utility class
-+ resources                           |
-+ features                          | Feature files+ {booking}                      | Feature folder specific
-{feature_name}.feature        | Feature name+ {unHappyPaths}                | Feature folder specific
-{feature_name}.feature        | Feature name
-+ serenity.conf                     | Config file for Serenity
-+ logback-test.xml                  | Config logs file
-+ serenity.properties               | General properties Serenity
++ main                                      | Source main
+  + test                                    |
+      + java                                | Test runners and supporting code
+      + org.api.testing.demo                | Package base
+        + assertions                        | Assertions of the test
+        + interactions                      | Simple interaction class for REST requests.
+        + model                             | DTOs, Pojos, Builders, etc ...
+        + questions                         | Different types of test validation questions
+        + runners                           | Responsible for executing feature scenario
+        + steps                             | Sets of test steps
+            + {feature_name}                | Feature name
+            + booking                       | Utility class for definition steps
+            + hooks                         | Definition of Hooks
+        + tasks                             | High-level actions that define a set of actor interactions
+        + utils                             | General utility class
+  + resources                               |
+    + features                              | 
+      feature files+ {booking}              | Feature folder specific
+      {feature_name}.feature             | Features name
+    + serenity.conf                         | Config file for Serenity
+    + logback-test.xml                      | Config logs file
+  + serenity.properties                     | General properties Serenity
 ```
 
 ***
