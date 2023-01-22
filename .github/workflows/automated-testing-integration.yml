@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - develop
-      - feature/*
+
   schedule:
-    - cron: "00 11 * * FRI"
+    - cron: "00 13 * * TUE"
   workflow_dispatch:
 
 env:
