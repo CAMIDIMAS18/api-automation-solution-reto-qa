@@ -3,43 +3,52 @@ package org.api.testing.demo.steps.booking.common;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
 import io.cucumber.java.es.Pero;
+import org.api.testing.demo.tasks.booking.created.NotCreateBookingTask;
+import org.api.testing.demo.tasks.common.ConsumeDeleteTask;
 import org.api.testing.demo.tasks.common.ConsumeGetTask;
 import org.api.testing.demo.utils.exceptions.NotQueryParameterFoundException;
 
+import java.util.List;
+import java.util.Map;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.api.testing.demo.assertions.EnsureResponseBodyStringTask.ensureThatResponseMessageMatchesWith;
+import static org.api.testing.demo.models.headers.GetHeaderModel.headersDefault;
+import static org.api.testing.demo.questions.common.ResponseTimeQuestion.responseTimeIs;
+import static org.api.testing.demo.questions.common.StatusCodeQuestion.httpResponseStatusCodeIs;
 import static org.api.testing.demo.steps.hooks.Actors.CAMILA;
-import static org.api.testing.demo.utils.constants.Constants.BOOKING_ID;
+import static org.api.testing.demo.utils.constants.Constants.*;
+import static org.api.testing.demo.utils.enums.HttpStatusCodes.*;
 import static org.api.testing.demo.utils.environments.Endpoints.GET_BOOKING_BY_ID;
+import static org.api.testing.demo.utils.exceptions.AssertionsServices.THE_RESPONSE_TIME_SERVICE_IS_NOT_EXPECTED;
+import static org.api.testing.demo.utils.exceptions.AssertionsServices.THE_STATUS_CODE_SERVICE_IS_NOT_EXPECTED;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class UnHappyPathsSteps {
 
-    @Pero("ella no envió un campo obligatorio en la información solicitada")
-    public void userDoesNotSendData() {
-
-        System.out.println("No enviar el campo de checkin o checkout");
-
+    @Pero("ella no envió un/el campo obligatorio lastname en la información solicitada")
+    public void userDoesNotSendData(List<Map<String, String>> datos) {
+        theActorInTheSpotlight().attemptsTo(NotCreateBookingTask.withInformationIncomplete(datos.get(0)));
     }
 
     @Pero("la reservación fue eliminada previamente")
     public void bookingPreviouslyDeleted() {
 
-        System.out.println("validar que la reserva se eliminó antes ¡¿");
-
+        theActorInTheSpotlight().attemptsTo(ConsumeGetTask.with(GET_BOOKING_BY_ID + CAMILA.recall(BOOKING_ID)));
     }
 
     @Cuando("ella consulte el ID de su reserva")
     public void ellaConsulteElDeSuReserva() {
-
-        System.out.println("Realizar consultar con el booking ID eliminado");
         theActorInTheSpotlight().attemptsTo(ConsumeGetTask.with(GET_BOOKING_BY_ID + CAMILA.recall(BOOKING_ID)));
-
     }
 
     @Pero("no se autenticó correctamente en el sistema")
     public void improperAuthentication() {
-
-        System.out.println("No hacer la autenticación");
-
+        CAMILA.forget(TOKEN);
+        theActorInTheSpotlight().attemptsTo(
+                ConsumeDeleteTask.with(CAMILA.recall(BOOKING_ID), headersDefault()));
     }
 
     @Entonces("no se deberá {} la reserva en el sistema")
@@ -47,35 +56,39 @@ public class UnHappyPathsSteps {
 
         switch (option) {
             case "crear":
+                theActorInTheSpotlight().should(seeThat(httpResponseStatusCodeIs(), equalTo(INTERNAL_SERVER_ERROR.getHttpStatusCode()))
+                        .orComplainWith(AssertionError.class, THE_STATUS_CODE_SERVICE_IS_NOT_EXPECTED));
 
-                System.out.println("validar - Status code: 500 Internal Server Error");
-
+                theActorInTheSpotlight().attemptsTo(ensureThatResponseMessageMatchesWith(SERVER_ERROR));
                 break;
 
             case "visualizar":
+                theActorInTheSpotlight().should(seeThat(httpResponseStatusCodeIs(), equalTo(NOT_FOUND.getHttpStatusCode()))
+                        .orComplainWith(AssertionError.class, THE_STATUS_CODE_SERVICE_IS_NOT_EXPECTED));
 
-                System.out.println("validar - status code: 404 Not Found");
-
+                theActorInTheSpotlight().attemptsTo(ensureThatResponseMessageMatchesWith(NOT_FOUND_BOOKING));
                 break;
 
             case "actualizar":
+                theActorInTheSpotlight().should(seeThat(httpResponseStatusCodeIs(), equalTo(METHOD_NOT_ALLOWED.getHttpStatusCode()))
+                        .orComplainWith(AssertionError.class, THE_STATUS_CODE_SERVICE_IS_NOT_EXPECTED));
 
-                System.out.println("validar - status code: 405 Method Not Allowed");
-
+                theActorInTheSpotlight().attemptsTo(ensureThatResponseMessageMatchesWith(NOT_METHOD_ALLOWED));
                 break;
 
             case "eliminar":
+                theActorInTheSpotlight().should(seeThat(httpResponseStatusCodeIs(), equalTo(FORBIDDEN.getHttpStatusCode()))
+                        .orComplainWith(AssertionError.class, THE_STATUS_CODE_SERVICE_IS_NOT_EXPECTED));
 
-                System.out.println("validar - status code: 403 Forbidden");
-
+                theActorInTheSpotlight().attemptsTo(ensureThatResponseMessageMatchesWith(FORBIDDEN_REQUEST));
                 break;
 
             default:
                 throw new NotQueryParameterFoundException(option);
         }
 
-        System.out.println("validar tiempo respuesta");
-
+        theActorInTheSpotlight().should(seeThat(responseTimeIs(), lessThanOrEqualTo(5000L))
+                .orComplainWith(AssertionError.class, THE_RESPONSE_TIME_SERVICE_IS_NOT_EXPECTED));
     }
 }
 
